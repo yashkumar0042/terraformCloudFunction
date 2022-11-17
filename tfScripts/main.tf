@@ -15,11 +15,10 @@ provider "google" {
   region  = "us-central1"
 }
 
-data "archive_file" "dotfiles" {
+data "archive_file" "zipfiles" {
   type        = "zip"
-  output_path = "${path.module}/files/dotfiles.zip"
-  excludes    = [ "${path.module}/unwanted.zip" ]
-  source_dir = "../"
+  output_path = "$../zipfiles.zip"
+  source_dir = "../cloudFuntion/"
 }
 
 resource "google_storage_bucket" "bucket" {
@@ -30,7 +29,7 @@ resource "google_storage_bucket" "bucket" {
 resource "google_storage_bucket_object" "archive" {
   name   = "index.zip"
   bucket = google_storage_bucket.bucket.name
-  source = "./path/to/zip/file/which/contains/code"
+  source = data.archive_file.zipfiles.output_path
 }
 
 resource "google_cloudfunctions_function" "function" {
