@@ -35,6 +35,7 @@ resource "google_cloudfunctions_function" "function" {
   name        = "new-function2"
   description = "My function"
   runtime     = "python310"
+  entry_point = "hello_world"
 
   source_archive_bucket = google_storage_bucket.bucket.name
   source_archive_object = google_storage_bucket_object.archive.name
