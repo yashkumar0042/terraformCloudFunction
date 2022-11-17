@@ -30,7 +30,7 @@ jobs:
         id: plan
         run: |-
           terraform plan \
-           -var="project_id=$GCP_PROJECT_ID" \
+           -var="project-id=$GCP_PROJECT_ID" \
            -out=PLAN
         working-directory: ./tfScripts/
 
