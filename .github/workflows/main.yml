@@ -1,5 +1,7 @@
 name: CFDeployment
 on: pull_request
+env:
+  TF_STATE_BUCKET_NAME: "new-tfstate-bucket5878"
 jobs:
   cf-deploy:
     runs-on: ubuntu-latest
