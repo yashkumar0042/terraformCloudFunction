@@ -34,4 +34,9 @@ jobs:
            -out=PLAN
         working-directory: ./tfScripts/
 
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply PLAN
+        working-directory: ./tfScripts/
+
         
