@@ -2,6 +2,7 @@ name: CFDeployment
 on: pull_request
 env:
   TF_STATE_BUCKET_NAME: "new-tfstate-bucket5878"
+  GCP_PROJECT_ID: "databricks-new"
 jobs:
   cf-deploy:
     runs-on: ubuntu-latest
@@ -24,3 +25,13 @@ jobs:
         id: init
         run: terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME"
         working-directory: ./tfScripts/
+        
+      - name: Terraform plan
+        id: plan
+        run: |-
+          terraform plan \
+           -var="project_id=$GCP_PROJECT_ID" \
+           -out=PLAN
+        working-directory: ./tfScripts/
+
+        
