@@ -4,6 +4,9 @@ jobs:
   cf-deploy:
     runs-on: ubuntu-latest
     steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
@@ -12,4 +15,4 @@ jobs:
       - name: Terraform init
         id: init
         run: terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME" -backend-config="region=us-east-1"
-        working-directory: ./terraform
+        working-directory: ./tfScripts/
