@@ -14,5 +14,5 @@ jobs:
 
       - name: Terraform init
         id: init
-        run: terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME" -backend-config="region=us-east-1"
+        run: terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME" 
         working-directory: ./tfScripts/
