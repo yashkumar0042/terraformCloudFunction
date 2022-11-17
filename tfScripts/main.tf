@@ -32,7 +32,7 @@ resource "google_storage_bucket_object" "archive" {
 }
 
 resource "google_cloudfunctions_function" "function" {
-  name        = "new-function"
+  name        = "new-function2"
   description = "My function"
   runtime     = "python310"
 
