@@ -62,5 +62,5 @@ resource "google_cloudfunctions_function_iam_member" "invoker" {
 }
 
 output "version" {
-      value       = google_cloudfunctions_function.function.versions
+      value       = google_cloudfunctions_function.function.versions.version
 }
