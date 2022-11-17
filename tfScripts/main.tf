@@ -14,6 +14,10 @@ provider "google" {
   region  = "us-central1"
 }
 
+locals {
+  cf_zip_archive_name = "cf-some-prefix-${data.archive_file.zipfiles.output_sha}.zip"
+}
+
 data "archive_file" "zipfiles" {
   type        = "zip"
   output_path = "$../zipfiles.zip"
@@ -26,7 +30,7 @@ resource "google_storage_bucket" "bucket" {
 }
 
 resource "google_storage_bucket_object" "archive" {
-  name   = "index.zip"
+  name   = locals.cf_zip_archive_name
   bucket = google_storage_bucket.bucket.name
   source = data.archive_file.zipfiles.output_path
 }
