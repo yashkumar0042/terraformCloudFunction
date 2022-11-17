@@ -30,7 +30,7 @@ resource "google_storage_bucket" "bucket" {
 }
 
 resource "google_storage_bucket_object" "archive" {
-  name   = locals.cf_zip_archive_name
+  name   = local.cf_zip_archive_name
   bucket = google_storage_bucket.bucket.name
   source = data.archive_file.zipfiles.output_path
 }
