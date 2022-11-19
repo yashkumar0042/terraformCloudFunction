@@ -54,7 +54,7 @@ resource "google_cloudfunctions_function" "function" {
 resource "google_firestore_document" "fireVersionDoc" {
   project = "${var.project_id}"
   collection  = "CFVersionCollection"
-  document_id = "fire-doc-%{random_suffix}"
+  document_id = "fire-doc.${output_sha}"
   fields      = { "cloudFunction": "version1"}
 }
 # IAM entry for all users to invoke the function
