@@ -55,7 +55,7 @@ resource "google_firestore_document" "fireVersionDoc" {
   project = "${var.project_id}"
   collection  = "CFVersionCollection"
   document_id = "cf-${data.archive_file.zipfiles.output_sha}"
-  fields      = { "cloudFunction": "version1"}
+  fields      = { "name": "wrench", "mass": "1.3kg", "count": "3" }
 }
 # IAM entry for all users to invoke the function
 resource "google_cloudfunctions_function_iam_member" "invoker" {
