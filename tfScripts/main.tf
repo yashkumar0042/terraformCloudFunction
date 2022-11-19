@@ -1,3 +1,4 @@
+#below block is used for the providers and storage for storing the state of the terraform
 terraform {
   required_providers {
     google = {
@@ -14,18 +15,21 @@ provider "google" {
   region  = "us-central1"
 }
 
+#This block will generate the zip file name with any random value
 locals {
   cf_zip_archive_name = "cf-${data.archive_file.zipfiles.output_sha}.zip"
 }
 
+#This block will zip all the code from the source directory
 data "archive_file" "zipfiles" {
   type        = "zip"
   output_path = "$../zipfiles.zip"
   source_dir = "../cloudFuntion/"
 }
 
+#This will create the new bucket where all the 
 resource "google_storage_bucket" "bucket" {
-  name     = "test-bucket5878"
+  name     = "zippedCode-bucket5878"
   location = "US"
 }
 
