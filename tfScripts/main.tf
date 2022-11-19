@@ -29,7 +29,7 @@ data "archive_file" "zipfiles" {
 
 #This will create the new bucket where all the 
 resource "google_storage_bucket" "bucket" {
-  name     = "zippedCode-bucket5878"
+  name     = "zippedcode-bucket5878"
   location = "US"
 }
 
