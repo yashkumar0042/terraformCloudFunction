@@ -10,10 +10,6 @@ terraform {
    prefix  = "terraform/state"
  }
 }
-provider "google" {
-  project = "${var.project_id}"
-  region  = "us-central1"
-}
 
 #This block will generate the zip file name with any random value
 locals {
