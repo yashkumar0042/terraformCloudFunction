@@ -7,3 +7,5 @@ variable "region" {
   type    = string
   default = "us-central1"
 }
+variable "version_id" {
+}
