@@ -31,6 +31,7 @@ jobs:
         run: |-
           terraform plan \
            -var="project_id=$GCP_PROJECT_ID" \
+           -var="version_id=$(gcloud functions describe new-function2|grep versionId)"\
            -out=PLAN
         working-directory: ./tfScripts/
 
@@ -41,7 +42,4 @@ jobs:
 
       - uses: 'google-github-actions/setup-gcloud@v1'
 
-      - name: check CF version
-        run: |-
-          gcloud functions describe new-function2|grep versionId
         
