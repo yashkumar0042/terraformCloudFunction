@@ -3,6 +3,7 @@ on: pull_request
 env:
     TF_STATE_BUCKET_NAME: "new-tfstate-bucket5878"
     GCP_PROJECT_ID: "databricks-new"
+    RUN_REGION: "us-central1"
 jobs:
   cf-deploy:
     runs-on: ubuntu-latest
