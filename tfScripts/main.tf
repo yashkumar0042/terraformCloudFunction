@@ -1,3 +1,4 @@
+if ! gsutil ls | grep gs://$TF_STATE_BUCKET_NAME ;then gsutil mb -p $GCP_PROJECT_ID -l $RUN_REGION -b on gs://$TF_STATE_BUCKET_NAME;fi
 #below block is used for the providers and storage for storing the state of the terraform
 terraform {
   required_providers {
