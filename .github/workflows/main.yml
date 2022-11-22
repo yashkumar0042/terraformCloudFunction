@@ -39,6 +39,9 @@ jobs:
         id: apply
         run: terraform apply PLAN
         working-directory: ./tfScripts/
+        
+      - run: terraform output
+        working-directory: ./tfScripts/
 
       - uses: 'google-github-actions/setup-gcloud@v1'
 
