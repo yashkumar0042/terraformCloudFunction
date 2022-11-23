@@ -42,8 +42,6 @@ resource "google_storage_bucket_object" "archive" {
 
 }
 
-
-
 resource "google_cloudfunctions_function" "function" {
   name        = "new-function2"
   description = "My function"
@@ -62,7 +60,7 @@ resource "google_cloudfunctions_function" "function" {
 }
 resource "google_firestore_document" "fireVersionDoc" {
   project = "${var.project_id}"
-  collection  = "CFVersionCollection"
+  collection  = "${var.v_id}"
   document_id = "cloudVersion-document"
   fields      = "{\"CFVersion\":{\"mapValue\":{\"fields\":{\"CloudBuildVersion\":{\"stringValue\":\"${var.v_id}\"}}}}}"
 }
