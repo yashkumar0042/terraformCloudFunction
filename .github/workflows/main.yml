@@ -36,7 +36,7 @@ jobs:
       - name: Terraform plan
         id: plan
         run: |-
-          terraform plan \
+          terraform plan -lock=false\
            -var="project_id=$GCP_PROJECT_ID" \
            -var="version_id=$(gcloud functions describe new-function2|grep versionId|sed 's/\://'g)"\
            -var="updated_time=$(gcloud functions describe new-function2|grep updateTime|sed 's/\://')"\
@@ -46,7 +46,7 @@ jobs:
 
       - name: Terraform Apply
         id: apply
-        run: terraform apply PLAN
+        run: terraform apply -lock=false PLAN
         working-directory: ./tfScripts/
         
       - run: terraform output
