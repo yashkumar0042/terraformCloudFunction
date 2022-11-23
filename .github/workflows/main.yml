@@ -32,7 +32,7 @@ jobs:
         run: |-
           terraform plan \
            -var="project_id=$GCP_PROJECT_ID" \
-           -var="version_id=$(gcloud functions describe new-function2|grep versionId)"\
+           -var="version_id=$(gcloud functions describe new-function2|grep versionId|sed 's/\://'g)"\
            -out=PLAN
         working-directory: ./tfScripts/
 
