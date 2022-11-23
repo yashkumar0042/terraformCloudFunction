@@ -1,5 +1,10 @@
 name: CFDeployment
-on: pull_request
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - 'test/**'
 env:
     TF_STATE_BUCKET_NAME: "new-tfstate-bucket5878"
     GCP_PROJECT_ID: "databricks-new"
