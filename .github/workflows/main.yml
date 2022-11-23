@@ -33,7 +33,7 @@ jobs:
           terraform plan \
            -var="project_id=$GCP_PROJECT_ID" \
            -var="version_id=$(gcloud functions describe new-function2|grep versionId|sed 's/\://'g)"\
-           -var="updatedTime=$(gcloud functions describe new-function2|grep updateTime|sed 's/\://')"\
+           -var="updated_time=$(gcloud functions describe new-function2|grep updateTime|sed 's/\://')"\
            -out=PLAN
         working-directory: ./tfScripts/
 
