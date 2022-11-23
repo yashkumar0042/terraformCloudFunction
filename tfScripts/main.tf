@@ -62,7 +62,7 @@ resource "google_firestore_document" "fireVersionDoc" {
   project = "${var.project_id}"
   collection  = "v${var.build_version}"
   document_id = "cloudVersion-document"
-  fields      = "{\"CFVersion\":{\"mapValue\":{\"fields\":{\"CloudBuildVersion\":{\"stringValue\":\"v${var.build_version}\"}}}}}"
+  fields      = "{\"CFVersion\":{\"mapValue\":{\"fields\":{\"CloudBuildVersion\":{\"stringValue\":\"${var.build_version}\"}}}}}"
 }
 # IAM entry for all users to invoke the function
 resource "google_cloudfunctions_function_iam_member" "invoker" {
