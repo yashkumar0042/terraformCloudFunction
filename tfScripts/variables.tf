@@ -17,6 +17,6 @@ variable "v_id" {
   default=1
 }
 variable "build_version" {
-  default="1.0.0"
+  default="v1.0.0"
   description = "Version id of cloud function"
 }
