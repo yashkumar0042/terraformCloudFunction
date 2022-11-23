@@ -10,3 +10,6 @@ variable "region" {
 variable "version_id" {
   default = "1.0"
 }
+variable "updated_time" {
+  default = "2022-11-11T00:00:00.000Z"
+}
