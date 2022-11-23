@@ -40,7 +40,7 @@ jobs:
            -var="project_id=$GCP_PROJECT_ID" \
            -var="version_id=$(gcloud functions describe new-function2|grep versionId|sed 's/\://'g)"\
            -var="updated_time=$(gcloud functions describe new-function2|grep updateTime|sed 's/\://')"\
-           -var="v_id=$(gcloud functions describe new-function2|grep versionId|awk -F "'" '{print $2 }')"\
+           -var="v_id=$(gcloud functions describe new-function2|grep versionId|awk -F "'" '{print $2 }'|tail -1)"\
            -out=PLAN
         working-directory: ./tfScripts/
 
