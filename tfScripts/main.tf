@@ -36,9 +36,9 @@ resource "google_storage_bucket_object" "archive" {
   name   = local.cf_zip_archive_name
   bucket = google_storage_bucket.bucket.name
   source = data.archive_file.zipfiles.output_path
-  lifecycle {
-   prevent_destroy = true
- }
+  #lifecycle {
+  # prevent_destroy = true
+  #}
 
 }
 
