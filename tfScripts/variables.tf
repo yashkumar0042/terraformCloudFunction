@@ -13,3 +13,6 @@ variable "version_id" {
 variable "updated_time" {
   default = "2022-11-11T00:00:00.000Z"
 }
+variable "v_id" {
+  default=1
+}
