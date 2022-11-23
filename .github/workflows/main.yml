@@ -1,0 +1,60 @@
+name: CFDeployment
+on:
+  pull_request:
+    branches:
+      - 'test**'
+env:
+    TF_STATE_BUCKET_NAME: "new-tfstate-bucket5878"
+    GCP_PROJECT_ID: "databricks-new"
+    RUN_REGION: "us-central1"
+jobs:
+  cf-deploy:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCP_TF_SECRET }}'
+      
+      - uses: 'google-github-actions/setup-gcloud@v1'
+      
+      - name: "create tf bucket"
+        run:
+            if ! gsutil ls | grep gs://$TF_STATE_BUCKET_NAME ;then gsutil mb -p $GCP_PROJECT_ID -l $RUN_REGION -b on gs://$TF_STATE_BUCKET_NAME;fi
+            
+      - name: setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform init
+        id: init
+        run: terraform init -backend-config="bucket=$TF_STATE_BUCKET_NAME"
+        working-directory: ./tfScripts/
+        
+      - name: Terraform plan
+        id: plan
+        run: |-
+          terraform plan -lock=false\
+           -var="project_id=$GCP_PROJECT_ID" \
+           -var="version_id=$(gcloud functions describe new-function2|grep versionId|sed 's/\://'g|tail -1)"\
+           -var="updated_time=$(gcloud functions describe new-function2|grep updateTime|sed 's/\://'|tail -1)"\
+           -var="v_id=$(gcloud functions describe new-function2|grep versionId|awk -F "'" '{print $2 }'|tail -1)"\
+           -out=PLAN
+        working-directory: ./tfScripts/
+
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -lock=false PLAN
+        working-directory: ./tfScripts/
+        
+      - run: terraform output
+        working-directory: ./tfScripts/
+
+ 
+
+        
