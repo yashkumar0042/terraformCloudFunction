@@ -14,7 +14,9 @@ terraform {
 
 #This block will generate the zip file name with any random value
 locals {
-  cf_zip_archive_name = "cf-${data.archive_file.zipfiles.output_sha}.zip"
+  cf_zip_archive_name = "cf-v${var.version_id}-${data.archive_file.zipfiles.output_sha}.zip"
+  
+  
 }
 
 #This block will zip all the code from the source directory
