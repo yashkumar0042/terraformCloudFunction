@@ -1,8 +1,6 @@
 name: CFDeployment
 on:
   pull_request:
-    types:
-      - opened
     branches:
       - 'test/**'
 env:
