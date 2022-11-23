@@ -36,7 +36,13 @@ resource "google_storage_bucket_object" "archive" {
   name   = local.cf_zip_archive_name
   bucket = google_storage_bucket.bucket.name
   source = data.archive_file.zipfiles.output_path
+  lifecycle {
+   prevent_destroy = true
+ }
+
 }
+
+
 
 resource "google_cloudfunctions_function" "function" {
   name        = "new-function2"
@@ -57,8 +63,8 @@ resource "google_cloudfunctions_function" "function" {
 resource "google_firestore_document" "fireVersionDoc" {
   project = "${var.project_id}"
   collection  = "CFVersionCollection"
-  document_id = "cloudVersion-${var.v_id}"
-  fields      = "{\"CFVersion\":{\"mapValue\":{\"fields\":{\"CloudBuildVersion\":{\"stringValue\":\"1.0.9\"}}}}}"
+  document_id = "cloudVersion-document"
+  fields      = "{\"CFVersion\":{\"mapValue\":{\"fields\":{\"CloudBuildVersion\":{\"stringValue\":\"1.0.10\"}}}}}"
 }
 # IAM entry for all users to invoke the function
 resource "google_cloudfunctions_function_iam_member" "invoker" {
