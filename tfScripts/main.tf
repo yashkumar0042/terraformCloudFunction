@@ -14,7 +14,7 @@ terraform {
 
 #This block will generate the zip file name with any random value
 locals {
-  cf_zip_archive_name = "cf-v${var.build_version}-${data.archive_file.zipfiles.output_sha}.zip"
+  cf_zip_archive_name = "cf-v${var.v_id}-${data.archive_file.zipfiles.output_sha}.zip"
   
   
 }
@@ -64,7 +64,7 @@ resource "google_firestore_document" "fireVersionDoc" {
   project = "${var.project_id}"
   collection  = "CFVersionCollection"
   document_id = "cloudVersion-document"
-  fields      = "{\"CFVersion\":{\"mapValue\":{\"fields\":{\"CloudBuildVersion\":{\"stringValue\":\"${var.build_version}\"}}}}}"
+  fields      = "{\"CFVersion\":{\"mapValue\":{\"fields\":{\"CloudBuildVersion\":{\"stringValue\":\"${var.v_id}\"}}}}}"
 }
 # IAM entry for all users to invoke the function
 resource "google_cloudfunctions_function_iam_member" "invoker" {
