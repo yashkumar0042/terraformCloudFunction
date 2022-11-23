@@ -16,7 +16,9 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: '${{ secrets.GCP_TF_SECRET }}'
-        
+      
+      - uses: 'google-github-actions/setup-gcloud@v1'
+      
       - name: "create tf bucket"
         run:
             if ! gsutil ls | grep gs://$TF_STATE_BUCKET_NAME ;then gsutil mb -p $GCP_PROJECT_ID -l $RUN_REGION -b on gs://$TF_STATE_BUCKET_NAME;fi
@@ -50,6 +52,6 @@ jobs:
       - run: terraform output
         working-directory: ./tfScripts/
 
-      - uses: 'google-github-actions/setup-gcloud@v1'
+ 
 
         
