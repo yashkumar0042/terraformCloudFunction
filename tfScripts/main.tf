@@ -55,7 +55,7 @@ resource "google_cloudfunctions_function" "function" {
 resource "google_firestore_document" "fireVersionDoc" {
   project = "${var.project_id}"
   collection  = "CFVersionCollection"
-  document_id = "{cloudVersion-"${var.v_id}"}"
+  document_id = "cloudVersion-${var.v_id}"
   fields      = "{\"CFVersion\":{\"mapValue\":{\"fields\":{\"${var.version_id}\":{\"stringValue\":\"${var.updated_time}\"}}}}}"
 }
 # IAM entry for all users to invoke the function
